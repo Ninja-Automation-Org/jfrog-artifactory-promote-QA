@@ -11,14 +11,16 @@ jobs:
     steps:
       - name: checkout-source-code
         uses: cloudbees-io/checkout@v1
-      - name: jfrog-actions-workflow-promote-file
+      - name: jfrog-promote-docker-image
         uses: cloudbees-io/jfrog-artifactory-promote-image@v1
         with:
           url: ${{ vars.JFROG_URL }}
           username: ${{ vars.JFROG_ACTIONS_USERNAME }}
           password: ${{ secrets.JFROG_ACTIONS_PASSWORD }}
-          source-repository-name: jfrog-xray-test
-          target-repository-name: jfrog-test-docker-target-repo
-          source-image-name: test-image
+          source-repository-name: jfrog-test-source
+          target-repository-name: jfrog-test-target
+          source-image-name: action-test-image
+          target-image-name: action-test-image
           source-tag: latest
+          target-tag: latest
           copy: "true"
